@@ -14,10 +14,17 @@ GridRenderer.prototype.render = function () {
         y: this.fov.translate.y * this.fov.scale
       };
 
+  context.strokeStyle = "#222222";
+
   context.beginPath();
+
+  // center X
   context.moveTo(center.x + translate.x, 0);
   context.lineTo(center.x + translate.x, this.view.size.height);
+
+  // center Y
   context.moveTo(0, center.y + translate.y);
   context.lineTo(this.view.size.width, center.y + translate.y);
+
   context.stroke();
 };

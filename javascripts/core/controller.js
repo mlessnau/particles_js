@@ -11,4 +11,7 @@ Controller.prototype.initialize = function () {
 };
 
 Controller.prototype.initializeEventHandlers = function () {
+  var self = this;
+
+  window.setInterval(function () { self.eventMediator.publish("simulator:step"); }, 10);
 };

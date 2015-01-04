@@ -7,39 +7,76 @@
         <script type="text/javascript" src="javascripts/support/view_port.js"></script>
         <script type="text/javascript" src="javascripts/support/event_mediator.js"></script>
         <script type="text/javascript" src="javascripts/model/fov.js"></script>
+        <script type="text/javascript" src="javascripts/model/particle.js"></script>
+        <script type="text/javascript" src="javascripts/model/simulator.js"></script>
         <script type="text/javascript" src="javascripts/view/grid_renderer.js"></script>
-        <script type="text/javascript" src="javascripts/view/fov_controls_renderer.js"></script>
+        <script type="text/javascript" src="javascripts/view/controls_renderer.js"></script>
+        <script type="text/javascript" src="javascripts/view/particle_renderer.js"></script>
         <script type="text/javascript" src="javascripts/core/view.js"></script>
         <script type="text/javascript" src="javascripts/core/model.js"></script>
         <script type="text/javascript" src="javascripts/core/controller.js"></script>
         <script type="text/javascript" src="javascripts/application.js"></script>
 
-        <script id="fovControlsTemplate" type="text/template">
-            <div class="fovControls">
+        <script id="controlsTemplate" type="text/template">
+            <div class="controls">
                 <table>
-                    <tr>
-                        <td></td>
-                        <td><input type="button" value="N"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><input type="button" value="W"></td>
-                        <td><input class="resetButton" type="button" value="&times;"></td>
-                        <td><input type="button" value="E"></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><input type="button" value="S"></td>
-                        <td></td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th colspan="3">Translate</th>
+                        </tr>
+                    </thead>
+
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">x: <span id="fovTranslateX"></span></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3">y: <span id="fovTranslateY"></span></td>
+                        </tr>
+                    </tfoot>
+
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td><input type="button" value="N"></td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="button" value="W"></td>
+                            <td><input class="resetButton" type="button" value="&times;"></td>
+                            <td><input type="button" value="E"></td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td><input type="button" value="S"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
                 </table>
 
                 <table>
-                    <tr>
-                        <td><input type="button" value="-"></td>
-                        <td><input class="resetButton" type="button" value="&times;"></td>
-                        <td><input type="button" value="+"></td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th colspan="3">Scale</th>
+                        </tr>
+                    </thead>
+
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">a: <span id="fovScale"></span></td>
+                        </tr>
+                    </tfoot>
+
+                    <tbody>
+                        <tr>
+                            <td><input type="button" value="-"></td>
+                            <td><input class="resetButton" type="button" value="&times;"></td>
+                            <td><input type="button" value="+"></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </script>
