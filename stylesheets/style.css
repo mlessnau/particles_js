@@ -20,11 +20,19 @@ table {
   padding: 10px;
 }
 
-.fovControls table input[type=button] {
-  width: 30px;
-  height: 30px;
-}
-
 .fovControls table + table {
   margin-top: 10px;
+}
+
+input[type=button], button {
+  width: 30px;
+  height: 30px;
+  border-radius: 0;
+}
+
+.resetButton {
+  color: #fff;
+  background-color: #c9302c;
+  border-color: #ac2925;
+  border-width: 1px;
 }
