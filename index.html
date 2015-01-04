@@ -1,15 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script type="text/javascript" src="js/lib/vector.js"></script>
-        <script type="text/javascript" src="js/lib/particle.js"></script>
-        <script type="text/javascript" src="js/lib/view_port.js"></script>
-        <script type="text/javascript" src="js/lib/view.js"></script>
-        <script type="text/javascript" src="js/lib/simulator.js"></script>
-        <script type="text/javascript" src="js/lib/app.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
+        <meta charset="utf-8">
+        <title>Particles</title>
+        <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+        <script type="text/javascript" src="javascripts/support/view_port.js"></script>
+        <script type="text/javascript" src="javascripts/support/event_mediator.js"></script>
+        <script type="text/javascript" src="javascripts/model/fov.js"></script>
+        <script type="text/javascript" src="javascripts/view/grid_renderer.js"></script>
+        <script type="text/javascript" src="javascripts/view/fov_controls_renderer.js"></script>
+        <script type="text/javascript" src="javascripts/core/view.js"></script>
+        <script type="text/javascript" src="javascripts/core/model.js"></script>
+        <script type="text/javascript" src="javascripts/core/controller.js"></script>
+        <script type="text/javascript" src="javascripts/application.js"></script>
+
+        <script id="fovControlsTemplate" type="text/template">
+            <div class="fovControls">
+                <table>
+                    <tr>
+                        <td></td>
+                        <td><input type="button" value="N"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" value="W"></td>
+                        <td><input type="button" value="&times;"></td>
+                        <td><input type="button" value="E"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="button" value="S"></td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <table>
+                    <tr>
+                        <td><input type="button" value="-"></td>
+                        <td><input type="button" value="&times;"></td>
+                        <td><input type="button" value="+"></td>
+                    </tr>
+                </table>
+            </div>
+        </script>
     </head>
 
-    <body onload="bootstrap()"></body>
+    <body id="fov" onload="Application.create('fov')"></body>
 </html>
