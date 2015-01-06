@@ -27,6 +27,10 @@ Simulator.prototype.step = function (event) {
       j,
       f,
       dt,
+      d,
+      f,
+      G = 2000,
+      r12 = vec2.create(),
       a = vec2.create(),
       currentStep = Date.now();
 
@@ -34,18 +38,28 @@ Simulator.prototype.step = function (event) {
     dt = 0.1; //(currentStep - this.lastStep) / 1000;
 
     for (i in this.particles) {
-      f = this.calculateGravitationalForce(i);
+      f = vec2.create();
+
+      for (j in this.particles) {
+        if (j != i) {
+          vec2.sub(r12, this.particles[j].position, this.particles[i].position);
+
+          d = Math.max(0.001, vec2.length(r12));
+
+          vec2.sub(r12, this.particles[j].position, this.particles[i].position);
+          vec2.scale(r12, r12, 1 / d);
+          vec2.scaleAndAdd(f, f, r12, G * this.particles[i].mass * this.particles[j].mass / Math.pow(d, 2));
+
+          // handle collisions
+          if (vec2.distance(this.particles[i].position, this.particles[j].position) <= (this.particles[i].radius + this.particles[j].radius)) {
+            this.simulateCollision(this.particles[i], this.particles[j]);
+          }
+        }
+      }
 
       vec2.scale(a, f, 1 / this.particles[i].mass);
       vec2.scaleAndAdd(this.particles[i].velocity, this.particles[i].velocity, a, dt);
       vec2.scaleAndAdd(this.particles[i].position, this.particles[i].position, this.particles[i].velocity, dt);
-
-      // handle collisions
-      for (j in this.particles) {
-        if (i != j && vec2.distance(this.particles[i].position, this.particles[j].position) <= (this.particles[i].radius + this.particles[j].radius)) {
-          this.simulateCollision(this.particles[i], this.particles[j]);
-        }
-      }
     }
   }
 
@@ -79,26 +93,4 @@ Simulator.prototype.simulateCollision = function (particle1, particle2) {
   vec2.scale(mtd, v, (particle1.radius + particle2.radius - d) / d);
   vec2.scaleAndAdd(particle1.position, particle1.position, mtd, im1 / (im1 + im2));
   vec2.scaleAndAdd(particle2.position, particle2.position, mtd, -im2 / (im1 + im2));
-};
-
-Simulator.prototype.calculateGravitationalForce = function (particleId) {
-  var i,
-      d,
-      G = 2000,
-      r12 = vec2.create(),
-      f = vec2.create();
-
-  for (i in this.particles) {
-    if (i != particleId) {
-      vec2.sub(r12, this.particles[i].position, this.particles[particleId].position);
-
-      d = Math.max(0.001, vec2.length(r12));
-
-      vec2.sub(r12, this.particles[i].position, this.particles[particleId].position);
-      vec2.scale(r12, r12, 1 / d);
-      vec2.scaleAndAdd(f, f, r12, G * this.particles[particleId].mass * this.particles[i].mass / Math.pow(d, 2));
-    }
-  }
-
-  return f;
 };

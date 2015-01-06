@@ -35,7 +35,7 @@ Application.prototype.initializeParticles = function () {
     this.model.particles.push(new Particle(vec2.fromValues(50, 50), vec2.fromValues(-4, 1), 35, 2, "#ff0000"));
     this.model.particles.push(new Particle(vec2.fromValues(50, -50), vec2.fromValues(1, 4), 30, 2, "#ffff00"));
   } else if (useExample == 4) {
-    var i, j, n = 14;
+    var i, j, n = 15;
 
     for (i = 0; i < n; ++i) {
       for (j = 0; j < n; ++j) {
