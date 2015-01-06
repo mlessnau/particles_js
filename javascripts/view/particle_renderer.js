@@ -7,18 +7,15 @@ var ParticleRenderer = function (view) {
 ParticleRenderer.prototype.render = function () {
   var i,
       context = this.view.getContext(),
-      center = {
-        x: this.view.size.width / 2,
-        y: this.view.size.height / 2
-      };
+      center = vec2.fromValues(this.view.size.width / 2, this.view.size.height / 2);
 
   for (i in this.particles) {
     context.beginPath();
     context.fillStyle = this.particles[i].color;
 
     context.arc(
-      center.x + (this.fov.translate.x + this.particles[i].position.x) * this.fov.scale,
-      center.y + (this.fov.translate.y + this.particles[i].position.y) * this.fov.scale,
+      center[0] + (this.fov.translate[0] + this.particles[i].position[0]) * this.fov.scale,
+      center[1] + (this.fov.translate[1] + this.particles[i].position[1]) * this.fov.scale,
       this.particles[i].radius * this.fov.scale,
       0,
       Math.PI * 2,
