@@ -27,7 +27,6 @@ Simulator.prototype.step = function (event) {
       j,
       f,
       dt,
-      d,
       f,
       G = 2000,
       r12 = vec2.create(),
@@ -43,14 +42,8 @@ Simulator.prototype.step = function (event) {
       for (j in this.particles) {
         if (j != i) {
           vec2.sub(r12, this.particles[j].position, this.particles[i].position);
+          vec2.scaleAndAdd(f, f, r12, G * this.particles[i].mass * this.particles[j].mass / Math.pow(Math.max(0.001, vec2.length(r12)), 3));
 
-          d = Math.max(0.001, vec2.length(r12));
-
-          vec2.sub(r12, this.particles[j].position, this.particles[i].position);
-          vec2.scale(r12, r12, 1 / d);
-          vec2.scaleAndAdd(f, f, r12, G * this.particles[i].mass * this.particles[j].mass / Math.pow(d, 2));
-
-          // handle collisions
           if (vec2.distance(this.particles[i].position, this.particles[j].position) <= (this.particles[i].radius + this.particles[j].radius)) {
             this.simulateCollision(this.particles[i], this.particles[j]);
           }
